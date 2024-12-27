@@ -3,11 +3,12 @@ import http.client
 import zlib
 from bs4 import BeautifulSoup
 import requests
-
+import os
 
 app = Flask(__name__)
 
 @app.route('/')
+
 def hello():
     return "Hello, Vercel!"
 
@@ -152,4 +153,6 @@ def call_zaubacorp(companyname):
         return None
 
 if __name__ == '__main__':
-    app.run()
+    # Use environment variable PORT (or default to 5000) and bind to all interfaces (0.0.0.0)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
